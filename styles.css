@@ -1,0 +1,184 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Gotham Rounded, sans-serif;
+    font-weight: normal;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+
+    --accent-color: orangered;
+    --text-color: black;
+    --button-text-color: rgb(0, 0, 0);
+    --output-color: rgba(14, 13, 13, 0.75);
+
+    --transition-delay: 1s;
+
+    transition: var(--transition-delay);
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+body.dark {
+    --accent-color: #29207a;
+    --background-color: #333;
+    --text-color: white;
+    --button-text-color: rgb(187, 179, 179);
+    --output-color: rgba(14, 13, 13, 0.75);
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 200px;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    z-index: 0;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 1px solid rgb(255, 255, 255);
+    outline: none;
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    border-radius: 0.3rem
+    
+}
+
+.calculator-grid > button:hover {
+    background-color: rgba(95, 90, 91, 0.75);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    grid-column: 1 / -1;
+    background-color: var(--output-color);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 0.5rem
+}
+
+.output .previous-operand {
+    color: rgba(255, 255, 255, .75);
+    font-size: 1.5rem; 
+}
+
+.output .current-operand {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'Anton', sans-serif;
+    font-size: 70px;
+    top: 20px;
+}
+
+.theme-title {
+    font-family: 'Crete Round', serif;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.theme-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5vh;
+    margin: 0;
+    margin-bottom: 3rem;
+}
+
+.theme-toggle-button {
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: .5em 1em;
+    border-radius: .3em;
+    border: none;
+    outline: none;
+    transition: var(--transition-delay);
+    transform: scale(1);
+    font-family: 'Crete Round', serif;
+}
+
+.theme-toggle-button .icon {
+    margin-right: .5rem;
+}
+
+.theme-toggle-button:hover,
+.theme-toggle-button:focus {
+transform: scale(1.2);
+}
+
+.sun-moon-container {
+    --rotation: 0;
+
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    top: 0;
+    justify-content: center;
+    height: 150vmin;
+    transform: rotate(calc(var(--rotation) * 1deg));
+    transition: transform var(--transition-delay);
+    z-index: 0;
+}
+
+.sun,
+.moon {
+    position: absolute;
+    transition: opacity var(--transition-delay);
+    width: 30px;
+    height: 30px;
+    fill: var(--accent-color);
+}
+
+.sun {
+    top: 5%;
+    opacity: 1;
+}
+
+.dark .sun {
+    opacity: 0;
+}
+
+.moon {
+    bottom: 5%;
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+.dark .moon {
+    opacity: 1;
+}
